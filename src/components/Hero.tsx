@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       style={themeVars}
-      className="relative min-h-[calc(100vh-96px)] overflow-hidden bg-transparent px-4 py-16 text-[#251d18] sm:px-6 lg:px-10"
+      className="relative min-h-[calc(100vh-96px)] overflow-x-hidden bg-transparent px-4 py-16 text-[#251d18] sm:px-6 lg:px-10"
     >
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.05fr_0.95fr]">
         {/* Content - centered under md, left on md+ */}
@@ -248,22 +248,20 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  <div className="flex h-full items-end justify-center gap-1 rounded-xl border-[3px] border-[var(--teal)] bg-[var(--border)] px-2.5 py-3 shadow-[3px_3px_0_var(--border)]">
-                    {[14, 24, 18, 32, 22, 34, 20, 28].map(
-                      (height, index) => (
-                        <motion.span
-                          key={index}
-                          animate={{ height: [height, height + 9, height] }}
-                          transition={{
-                            duration: 0.75,
-                            repeat: Infinity,
-                            delay: index * 0.08,
-                          }}
-                          className="w-2.5 rounded-t-full bg-[var(--red)] shadow-[0_0_8px_var(--red)]"
-                          style={{ height }}
-                        />
-                      )
-                    )}
+                  <div className=" h-full items-end justify-center gap-1 rounded-xl border-[3px] border-[var(--teal)] bg-[var(--border)] px-2.5 py-3 shadow-[3px_3px_0_var(--border)] hidden sm:flex">
+                    {[14, 24, 18, 32, 22, 34, 20, 28].map((height, index) => (
+                      <motion.span
+                        key={index}
+                        animate={{ height: [height, height + 9, height] }}
+                        transition={{
+                          duration: 0.75,
+                          repeat: Infinity,
+                          delay: index * 0.08,
+                        }}
+                        className="w-2.5 rounded-t-full bg-[var(--red)] shadow-[0_0_8px_var(--red)]"
+                        style={{ height }}
+                      />
+                    ))}
                   </div>
                 </div>
 

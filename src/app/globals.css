@@ -2,15 +2,20 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  width: 100%;
 }
 
-/* Font setup */
+* {
+  box-sizing: border-box;
+}
+
 .font-display {
   font-family: var(--font-heading), Arial, Helvetica, sans-serif;
   letter-spacing: 0.01em;
