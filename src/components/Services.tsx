@@ -73,7 +73,7 @@ export default function ServicesPage() {
               Buy • Sell • Request • Collect
             </div>
 
-            <h1 className="mx-auto text-center text-5xl font-black uppercase leading-[0.85] tracking-[-0.02em] text-[#c7392c] drop-shadow-[2px_2px_0_#251d18] sm:text-6xl md:text-7xl">
+            <h1 className="mx-auto text-center text-4xl font-black uppercase leading-[0.85] tracking-[-0.02em] text-[#c7392c] drop-shadow-[2px_2px_0_#251d18] sm:text-6xl md:text-7xl">
               <span className="inline-block whitespace-nowrap">
                 Rec
                 <span className="relative mx-[0.03em] inline-flex h-[0.78em] w-[0.78em] translate-y-[-0.35em] items-center justify-center rounded-full border-[0.08em] border-[#251d18] bg-[#050505] align-baseline shadow-[2px_2px_0_#9bc5ad]">
@@ -86,7 +86,7 @@ export default function ServicesPage() {
                 rd
               </span>
 
-              <span className="ml-3 mt-3 text-[#251d18] drop-shadow-[2px_2px_0_#c7392c] flex">
+              <span className="ml-3 mt-3 text-[#251d18] drop-shadow-[2px_2px_0_#c7392c]">
                 Serv
                 <span className="relative mx-[0.04em] inline-flex h-[0.82em] w-[0.32em] translate-y-[0.09em] items-center justify-center align-baseline">
                   <span className="absolute top-0 h-[0.45em] w-[0.28em] rounded-full border-[0.045em] border-[#251d18] bg-[#9bc5ad]">
