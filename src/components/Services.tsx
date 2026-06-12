@@ -57,15 +57,16 @@ export default function ServicesPage() {
   return (
     <main
       id="services"
-      className="overflow-hidden bg-transparent text-[#251d18]"
+      className="overflow-x-hidden bg-transparent text-[#251d18]"
     >
       <section className="relative px-4 py-20 sm:px-6 lg:px-10">
         <div className="relative z-10 mx-auto max-w-7xl">
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: "easeOut" }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
             className="mx-auto mb-12 flex max-w-5xl flex-col items-center text-center"
           >
             <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-[#251d18] bg-[#f5ead3] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] shadow-[4px_4px_0_#251d18]">
@@ -119,14 +120,19 @@ export default function ServicesPage() {
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
-                  className="group relative z-0 block no-underline focus:outline-none focus-visible:ring-4 focus-visible:ring-[#c7392c]/40"
+                  className="group relative block no-underline focus:outline-none focus-visible:ring-4 focus-visible:ring-[#c7392c]/40"
                 >
                   <motion.article
-                    initial={{ opacity: 0, y: 26 }}
+                    initial={{ opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ duration: 0.55, delay: index * 0.06 }}
-                    className="relative overflow-visible rounded-2xl border-[4px] border-[#251d18] bg-[#f5ead3] text-[#251d18] shadow-[7px_7px_0_#251d18] transition duration-300 group-hover:-translate-y-1.5 group-hover:shadow-[10px_10px_0_#251d18]"
+                    viewport={{ once: true, amount: 0.18 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: index * 0.04,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{ y: -8 }}
+                    className="relative transform-gpu overflow-hidden rounded-2xl border-[4px] border-[#251d18] bg-[#f5ead3] text-[#251d18] shadow-[7px_7px_0_#251d18] transition-shadow duration-300 will-change-transform group-hover:shadow-[10px_10px_0_#251d18]"
                   >
                     {/* Top badges */}
                     <div className="absolute left-3 top-3 z-50 rounded-full border-2 border-[#251d18] bg-[#c7392c] px-3 py-1 text-[#f5ead3] shadow-[3px_3px_0_#251d18]">
@@ -140,11 +146,11 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Sleeve / Vinyl */}
-                    <div className="relative isolate aspect-square overflow-visible rounded-t-xl bg-[#24150f] p-3.5">
+                    <div className="relative isolate aspect-square overflow-hidden rounded-t-xl bg-[#24150f] p-3.5 sm:overflow-visible">
                       <div className="absolute inset-0 z-0 rounded-t-xl bg-[#24150f]" />
 
                       {/* Vinyl sliding out */}
-                      <div className="absolute right-3 top-1/2 z-40 h-[76%] w-[76%] -translate-y-1/2 translate-x-[5%] rounded-full border-[10px] border-[#1c1c1c] bg-[#050505] opacity-80 shadow-[0_0_28px_rgba(155,197,173,0.28)] transition-all duration-500 ease-out group-hover:translate-x-[34%] group-hover:rotate-[24deg] group-hover:opacity-100">
+                      <div className="absolute right-3 top-1/2 z-40 h-[76%] w-[76%] -translate-y-1/2 translate-x-[5%] transform-gpu rounded-full border-[10px] border-[#1c1c1c] bg-[#050505] opacity-80 shadow-[0_0_28px_rgba(155,197,173,0.28)] transition-transform duration-500 ease-out will-change-transform sm:group-hover:translate-x-[34%] sm:group-hover:rotate-[24deg] group-hover:opacity-100">
                         <div className="absolute inset-5 rounded-full border border-[#fff4d6]/10" />
                         <div className="absolute inset-10 rounded-full border border-[#fff4d6]/10" />
                         <div className="absolute inset-[3.75rem] rounded-full border border-[#fff4d6]/10" />
@@ -154,13 +160,13 @@ export default function ServicesPage() {
                       </div>
 
                       {/* Sleeve Image */}
-                      <div className="relative z-50 h-full w-[84%] overflow-hidden rounded-lg border-2 border-[#f5ead3]/30 bg-[#160f0b] shadow-xl transition duration-300 group-hover:rotate-[-2deg]">
+                      <div className="relative z-50 h-full w-[84%] transform-gpu overflow-hidden rounded-lg border-2 border-[#f5ead3]/30 bg-[#160f0b] shadow-xl transition-transform duration-300 will-change-transform sm:group-hover:rotate-[-2deg]">
                         <Image
                           src={item.image}
                           alt={item.title}
                           fill
                           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                          className="object-cover transition duration-500 group-hover:scale-105"
+                          className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
                         />
 
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0907]/90 via-[#0d0907]/20 to-transparent" />
@@ -183,7 +189,7 @@ export default function ServicesPage() {
                         {item.badge} Service
                       </p>
 
-                      <h3 className="mt-2 text-xl font-black uppercase leading-tight text-[#251d18] transition group-hover:text-[#c7392c]">
+                      <h3 className="mt-2 text-xl font-black uppercase leading-tight text-[#251d18] transition-colors duration-300 group-hover:text-[#c7392c]">
                         {item.title}
                       </h3>
 
@@ -196,7 +202,7 @@ export default function ServicesPage() {
                           Service
                         </span>
 
-                        <span className="text-[9px] font-black uppercase tracking-[0.15em] text-[#251d18]/55 transition group-hover:text-[#c7392c]">
+                        <span className="text-[9px] font-black uppercase tracking-[0.15em] text-[#251d18]/55 transition-colors duration-300 group-hover:text-[#c7392c]">
                           Click →
                         </span>
                       </div>
@@ -208,11 +214,12 @@ export default function ServicesPage() {
 
             {/* CTA card */}
             <motion.div
-              initial={{ opacity: 0, y: 26 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.55, delay: 0.35 }}
-              className="flex min-h-[420px] flex-col justify-between rounded-2xl border-[5px] border-[#251d18] bg-[#c7392c] p-6 text-[#f5ead3] shadow-[8px_8px_0_#251d18]"
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{ duration: 0.45, delay: 0.2, ease: "easeOut" }}
+              whileHover={{ y: -8 }}
+              className="flex min-h-[420px] transform-gpu flex-col justify-between rounded-2xl border-[5px] border-[#251d18] bg-[#c7392c] p-6 text-[#f5ead3] shadow-[8px_8px_0_#251d18] transition-shadow duration-300 will-change-transform hover:shadow-[10px_10px_0_#251d18]"
             >
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.28em] text-[#9bc5ad]">
