@@ -86,7 +86,7 @@ export default function ServicesPage() {
                 rd
               </span>
 
-              <span className="ml-3 mt-3 text-[#251d18] drop-shadow-[2px_2px_0_#c7392c]">
+              <span className="ml-3 mt-3 text-[#251d18] drop-shadow-[2px_2px_0_#c7392c] flex">
                 Serv
                 <span className="relative mx-[0.04em] inline-flex h-[0.82em] w-[0.32em] translate-y-[0.09em] items-center justify-center align-baseline">
                   <span className="absolute top-0 h-[0.45em] w-[0.28em] rounded-full border-[0.045em] border-[#251d18] bg-[#9bc5ad]">
