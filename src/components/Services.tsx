@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { scrollToSection } from "@/lib/scrollToSection";
 import {
   FiArrowUpRight,
   FiDisc,
@@ -110,18 +111,25 @@ export default function ServicesPage() {
           </motion.div>
 
           {/* Record Sleeve Cards */}
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="relative grid overflow-visible gap-7 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((item, index) => {
               const Icon = item.icon;
 
               return (
                 <Link
-                  key={item.title}
-                  href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
-                  className="group relative block no-underline focus:outline-none focus-visible:ring-4 focus-visible:ring-[#c7392c]/40"
-                >
+  key={item.title}
+  href={item.href}
+  target={item.external ? "_blank" : undefined}
+  rel={item.external ? "noopener noreferrer" : undefined}
+  scroll={false}
+  onClick={(e) => {
+    if (!item.external && item.href.startsWith("#")) {
+      e.preventDefault();
+      scrollToSection(item.href);
+    }
+  }}
+  className="group relative z-0 block overflow-visible no-underline transition hover:z-[999] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#c7392c]/40"
+>
                   <motion.article
                     initial={{ opacity: 0, y: 22 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +140,7 @@ export default function ServicesPage() {
                       ease: "easeOut",
                     }}
                     whileHover={{ y: -8 }}
-                    className="relative transform-gpu overflow-hidden rounded-2xl border-[4px] border-[#251d18] bg-[#f5ead3] text-[#251d18] shadow-[7px_7px_0_#251d18] transition-shadow duration-300 will-change-transform group-hover:shadow-[10px_10px_0_#251d18]"
+                    className="relative overflow-visible rounded-2xl border-[4px] border-[#251d18] bg-[#f5ead3] text-[#251d18] shadow-[7px_7px_0_#251d18] transition-shadow duration-300"
                   >
                     {/* Top badges */}
                     <div className="absolute left-3 top-3 z-50 rounded-full border-2 border-[#251d18] bg-[#c7392c] px-3 py-1 text-[#f5ead3] shadow-[3px_3px_0_#251d18]">
@@ -146,11 +154,11 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Sleeve / Vinyl */}
-                    <div className="relative isolate aspect-square overflow-hidden rounded-t-xl bg-[#24150f] p-3.5 sm:overflow-visible">
+                    <div className="relative isolate aspect-square overflow-visible rounded-t-xl bg-[#24150f] p-3.5">
                       <div className="absolute inset-0 z-0 rounded-t-xl bg-[#24150f]" />
 
                       {/* Vinyl sliding out */}
-                      <div className="absolute right-3 top-1/2 z-40 h-[76%] w-[76%] -translate-y-1/2 translate-x-[5%] transform-gpu rounded-full border-[10px] border-[#1c1c1c] bg-[#050505] opacity-80 shadow-[0_0_28px_rgba(155,197,173,0.28)] transition-transform duration-500 ease-out will-change-transform sm:group-hover:translate-x-[34%] sm:group-hover:rotate-[24deg] group-hover:opacity-100">
+                      <div className="absolute right-3 top-1/2 z-40 h-[76%] w-[76%] -translate-y-1/2 translate-x-[5%] transform-gpu rounded-full border-[10px] border-[#1c1c1c] bg-[#050505] opacity-80 shadow-[0_0_28px_rgba(155,197,173,0.28)] transition-transform duration-500 ease-out will-change-transform sm:group-hover:translate-x-[34%] sm:group-hover:rotate-[24deg] group-hover:opacity-100 ">
                         <div className="absolute inset-5 rounded-full border border-[#fff4d6]/10" />
                         <div className="absolute inset-10 rounded-full border border-[#fff4d6]/10" />
                         <div className="absolute inset-[3.75rem] rounded-full border border-[#fff4d6]/10" />
@@ -236,13 +244,14 @@ export default function ServicesPage() {
                 </p>
               </div>
 
-              <Link
-                href="#contact"
+              <button
+                type="button"
+                onClick={() => scrollToSection("#contact")}
                 className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-[#251d18] bg-[#251d18] px-6 py-4 text-sm font-black uppercase tracking-[0.16em] text-[#f5ead3] shadow-[5px_5px_0_#9bc5ad] transition hover:-translate-y-1"
               >
                 Contact Us
                 <FiArrowUpRight />
-              </Link>
+              </button>
             </motion.div>
           </div>
         </div>

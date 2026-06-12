@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiRadio } from "react-icons/fi";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 export default function AboutPage() {
   return (
@@ -122,8 +123,9 @@ export default function AboutPage() {
 
                 {/* Button links */}
                 <div className="flex flex-col gap-2 sm:flex-row">
-                  <Link
-                    href="#contact"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("#contact")}
                     className="rounded-xl border-2 border-[#251d18] bg-[#f5ead3] px-5 py-3 text-left shadow-[2px_2px_0_#251d18] transition hover:bg-[#fff4d6]"
                   >
                     <span className="block text-[9px] font-black uppercase tracking-[0.22em] text-[#c7392c]">
@@ -132,7 +134,7 @@ export default function AboutPage() {
                     <span className="block text-sm font-black uppercase tracking-wide">
                       Request A Record
                     </span>
-                  </Link>
+                  </button>
 
                   <a
                     href="https://www.discogs.com/seller/bowenrecords/profile"

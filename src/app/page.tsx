@@ -11,12 +11,15 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <Hero />
-      <SongOfTheDay />
-      <AboutPage />
-      <ServicesPage />
-      <Contact />
-      <Footer />
+
+      <main className="overflow-x-hidden pt-[92px]">
+        <Hero />
+        <SongOfTheDay />
+        <AboutPage />
+        <ServicesPage />
+        <Contact />
+        <Footer />
+      </main>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
   FiMapPin,
   FiPhone,
 } from "react-icons/fi";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const links = [
   { label: "Home", href: "/" },
@@ -24,7 +25,15 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.2fr_0.8fr_1fr] md:items-start">
         {/* Brand */}
         <div>
-          <Link href="/" className="inline-flex items-center gap-3">
+          <Link
+            href="/"
+            scroll={false}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("/");
+            }}
+            className="inline-flex items-center gap-3"
+          >
             <div className="relative h-14 w-14 overflow-hidden rounded-full border-[3px] border-[#251d18] bg-[#f5ead3] shadow-[3px_3px_0_#251d18]">
               <Image
                 src="/assets/logo.jpg"
@@ -63,6 +72,11 @@ export default function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
+                scroll={false}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                }}
                 className="group inline-flex w-fit items-center gap-2 text-sm font-black uppercase tracking-[0.13em] text-[#251d18] transition hover:text-[#c7392c]"
               >
                 {link.label}
@@ -108,8 +122,6 @@ export default function Footer() {
         <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#5b463a]">
           © {new Date().getFullYear()} Bowen Records. All rights reserved.
         </p>
-
-        
       </div>
     </footer>
   );

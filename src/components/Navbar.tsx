@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,16 +18,30 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const handleScroll = (href: string) => {
+    setOpen(false);
+
+    // Let the mobile menu close first, then scroll
+    setTimeout(() => {
+      scrollToSection(href);
+    }, 50);
+  };
+
   return (
     <motion.header
       initial={{ y: -90, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.65, ease: "easeOut" }}
-      className="sticky top-0 z-[999] border-b-[4px] border-[#251d18] bg-[#efe1c6]/95 px-4 py-3 backdrop-blur-md"
+      className="fixed left-0 top-0 z-[999] w-full border-b-[4px] border-[#251d18] bg-[#efe1c6]/95 px-4 py-3 backdrop-blur-md"
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => handleScroll("/")}
+          className="group flex items-center gap-3 text-left"
+          aria-label="Go to top"
+        >
           <motion.div
             whileHover={{ rotate: -8, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
@@ -56,7 +71,7 @@ export default function Navbar() {
               Records
             </motion.p>
           </div>
-        </Link>
+        </button>
 
         {/* Desktop Links */}
         <div className="hidden items-center gap-2 lg:flex">
@@ -71,12 +86,13 @@ export default function Navbar() {
                 ease: "easeOut",
               }}
             >
-              <Link
-                href={link.href}
+              <button
+                type="button"
+                onClick={() => handleScroll(link.href)}
                 className="rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.12em] text-[#251d18] transition hover:bg-[#9bc5ad] hover:text-[#251d18]"
               >
                 {link.label}
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -90,6 +106,7 @@ export default function Navbar() {
           <a
             href="https://www.discogs.com/seller/bowenrecords/profile"
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-[3px] border-[#251d18] bg-[#c7392c] px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-[#f5ead3] shadow-[3px_3px_0_#251d18] transition hover:bg-[#a92e24]"
           >
             Buy Our Records
@@ -159,13 +176,13 @@ export default function Navbar() {
                       duration: 0.25,
                     }}
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="block rounded-xl border-[3px] border-[#251d18] bg-[#efe1c6] px-5 py-4 text-base font-black uppercase tracking-[0.12em] text-[#251d18] shadow-[3px_3px_0_#251d18] transition hover:bg-[#9bc5ad]"
+                    <button
+                      type="button"
+                      onClick={() => handleScroll(link.href)}
+                      className="block w-full rounded-xl border-[3px] border-[#251d18] bg-[#efe1c6] px-5 py-4 text-left text-base font-black uppercase tracking-[0.12em] text-[#251d18] shadow-[3px_3px_0_#251d18] transition hover:bg-[#9bc5ad]"
                     >
                       {link.label}
-                    </Link>
+                    </button>
                   </motion.div>
                 ))}
 
@@ -175,15 +192,16 @@ export default function Navbar() {
                   exit={{ y: 14, opacity: 0 }}
                   transition={{ delay: 0.25, duration: 0.25 }}
                 >
-                  <Link
+                  <a
                     href="https://www.discogs.com/seller/bowenrecords/profile"
                     target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
                     className="mt-2 flex items-center justify-center gap-2 rounded-xl border-[3px] border-[#251d18] bg-[#c7392c] px-5 py-4 text-base font-black uppercase tracking-[0.12em] text-[#f5ead3] shadow-[3px_3px_0_#251d18]"
                   >
                     Buy Records
                     <FiArrowUpRight />
-                  </Link>
+                  </a>
                 </motion.div>
               </div>
             </motion.div>

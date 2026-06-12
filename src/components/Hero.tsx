@@ -2,9 +2,9 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowUpRight, FiMusic, FiSearch } from "react-icons/fi";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const colors = {
   bg: "#0d0b0a",
@@ -55,13 +55,14 @@ export default function Hero() {
           </h1>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
-            <Link
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-[3px] border-[#251d18] bg-[#c7392c] px-4 py-3 text-xs font-black uppercase tracking-[0.16em] text-[#f5ead3] shadow-[1px_1px_0_#251d18] transition hover:-translate-y-1 hover:bg-[#a92e24]"
-            >
-              Request a Record
-              <FiArrowUpRight />
-            </Link>
+            <button
+  type="button"
+  onClick={() => scrollToSection("#contact")}
+  className="inline-flex items-center justify-center gap-2 rounded-xl border-[3px] border-[#251d18] bg-[#c7392c] px-4 py-3 text-xs font-black uppercase tracking-[0.16em] text-[#f5ead3] shadow-[1px_1px_0_#251d18] transition hover:-translate-y-1 hover:bg-[#a92e24]"
+>
+  Request a Record
+  <FiArrowUpRight />
+</button>
 
             <a
               href="https://www.discogs.com/seller/bowenrecords/profile"
