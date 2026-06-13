@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     siteName,
     images: [
       {
-        url: "/assets/store.jpg",
+        url: "/assets/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Bowen Records vintage record shop and vinyl collection",
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     title: "Bowen Records | Vintage Vinyl, Rare Finds & Classic Records",
     description:
       "A throwback record shop experience for vinyl lovers, collectors, DJs, and music fans.",
-    images: ["/assets/store.jpg"],
+    images: ["/assets/logo.jpg"],
   },
 
   robots: {
@@ -141,7 +141,7 @@ const structuredData = {
       name: siteName,
       url: siteUrl,
       description: siteDescription,
-      image: `${siteUrl}/assets/store.jpg`,
+      image: `${siteUrl}/assets/logo.jpg`,
       logo: `${siteUrl}/assets/logo.jpg`,
       areaServed: {
         "@type": "Place",
