@@ -1,6 +1,7 @@
 // src/app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
+import type { ReactNode } from "react";
 import "./globals.css";
 
 const bebas = Bebas_Neue({
@@ -18,19 +19,21 @@ const inter = Inter({
 });
 
 const siteUrl = "https://bowenrecords.com";
+const siteName = "Bowen Records";
+const siteDescription =
+  "Bowen Records helps music lovers buy vinyl, sell collections, request specific records, and discover classic albums, rare finds, oldies, soul, jazz, funk, rock, R&B, and hip-hop records.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
-  applicationName: "Bowen Records",
+  applicationName: siteName,
 
   title: {
     default: "Bowen Records | Vintage Vinyl, Rare Finds & Classic Records",
     template: "%s | Bowen Records",
   },
 
-  description:
-    "Bowen Records helps music lovers buy vinyl, sell collections, request specific records, and discover classic albums, rare finds, oldies, soul, jazz, funk, rock, R&B, and hip-hop records.",
+  description: siteDescription,
 
   keywords: [
     "Bowen Records",
@@ -55,12 +58,12 @@ export const metadata: Metadata = {
     "hip-hop records",
   ],
 
-  authors: [{ name: "Bowen Records" }],
-  creator: "Bowen Records",
-  publisher: "Bowen Records",
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
 
   alternates: {
-    canonical: siteUrl,
+    canonical: "/",
   },
 
   icons: {
@@ -78,14 +81,14 @@ export const metadata: Metadata = {
     title: "Bowen Records | Vintage Vinyl, Rare Finds & Classic Records",
     description:
       "Buy vinyl, sell collections, request specific records, and discover classic albums through Bowen Records.",
-    url: siteUrl,
-    siteName: "Bowen Records",
+    url: "/",
+    siteName,
     images: [
       {
-        url: "/assets/logo.jpg",
+        url: "/assets/store.jpg",
         width: 1200,
         height: 630,
-        alt: "Bowen Records vintage vinyl record shop logo",
+        alt: "Bowen Records vintage record shop and vinyl collection",
       },
     ],
     locale: "en_US",
@@ -97,7 +100,7 @@ export const metadata: Metadata = {
     title: "Bowen Records | Vintage Vinyl, Rare Finds & Classic Records",
     description:
       "A throwback record shop experience for vinyl lovers, collectors, DJs, and music fans.",
-    images: ["/assets/logo.jpg"],
+    images: ["/assets/store.jpg"],
   },
 
   robots: {
@@ -115,49 +118,95 @@ export const metadata: Metadata = {
   category: "music",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#efe1c6",
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      url: siteUrl,
+      description: siteDescription,
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "MusicStore",
+      "@id": `${siteUrl}/#business`,
+      name: siteName,
+      url: siteUrl,
+      description: siteDescription,
+      image: `${siteUrl}/assets/store.jpg`,
+      logo: `${siteUrl}/assets/logo.jpg`,
+      areaServed: {
+        "@type": "Place",
+        name: "Los Angeles, California",
+      },
+      knowsAbout: [
+        "Vinyl records",
+        "Vintage records",
+        "Rare records",
+        "Classic albums",
+        "Oldies records",
+        "Soul records",
+        "Jazz records",
+        "Funk records",
+        "Rock records",
+        "R&B records",
+        "Hip-hop records",
+        "Record collections",
+      ],
+      serviceArea: {
+        "@type": "Place",
+        name: "Los Angeles, California",
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Bowen Records Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Buy Vinyl Records",
+              description:
+                "Browse and buy classic vinyl records, rare finds, oldies, soul, jazz, funk, rock, R&B, and hip-hop albums.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Sell Record Collections",
+              description:
+                "Sell vinyl record collections to Bowen Records for review and possible purchase.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Request Specific Records",
+              description:
+                "Request specific vinyl records, albums, artists, or genres you are looking for.",
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-  const businessSchema = {
-    "@context": "https://schema.org",
-    "@type": "MusicStore",
-    name: "Bowen Records",
-    url: siteUrl,
-    description:
-      "Bowen Records helps music lovers buy vinyl, sell collections, request specific records, and discover classic albums, rare finds, oldies, soul, jazz, funk, rock, R&B, and hip-hop records.",
-    image: `${siteUrl}/assets/logo.jpg`,
-    sameAs: [],
-    areaServed: {
-      "@type": "Place",
-      name: "Los Angeles, California",
-    },
-    makesOffer: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Vinyl Records",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Record Collection Buying",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Specific Record Requests",
-        },
-      },
-    ],
-  };
-
   return (
     <html
       lang="en"
@@ -167,7 +216,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(businessSchema),
+            __html: JSON.stringify(structuredData),
           }}
         />
 
